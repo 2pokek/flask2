@@ -31,7 +31,17 @@ def pricing_page():
 def about_page():
     reviews = Reviews.query.order_by(Reviews.date.desc()).all()
     return render_template("about.html", reviews=reviews)
+@app.route('/order')
+def order():
+    return render_template("order.html")
 
+@app.route('/order/Chillyevening')
+def order1():
+    return render_template("order1.html")
+
+@app.route('/order/Familysize')
+def order2():
+    return render_template("order2.html")
 
 @app.route('/create_comment', methods=['POST', 'GET'])
 def create_comment():

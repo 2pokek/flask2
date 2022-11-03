@@ -30,7 +30,7 @@
     <h1>Reviews</h1>
     {% if reviews|length > 0 %}
         {% for l in reviews %}
-        <footer class="alert alert-info pt-4 my-md-5 pt-md-4 border-bottom border-top">
+        <footer class="alert alert-dark pt-4 my-md-5 pt-md-4 border-bottom border-top">
             <h2>{{l.nickname}}</h2>
             <p><b>Date:{{ l.date.date() }}</b></p>
             <p><h6>{{l.text}}</h6></p>
