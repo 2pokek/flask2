@@ -19,13 +19,30 @@
           <li><a href="/" class="nav-link px-3 text-white">Home</a></li>
           <li><a href="/pricing" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="/about" class="nav-link px-2 text-white">About</a></li>
-          <li><a href="/about" class="nav-link px-2 text-white">reviews</a></li>
+          <li><a href="/create_comment" class="nav-link px-2 text-white">Add Review</a></li>
         </ul>
       </div>
     </div>
   </header>
 {% block body %}{% endblock %}
-
+<footer>
+<div class="container"><br><br><br><br><br><br>
+    <h1>Comments</h1>
+    {% if reviews|length > 0 %}
+        {% for l in reviews %}
+        <footer class="alert alert-info pt-4 my-md-5 pt-md-4 border-bottom border-top">
+            <h2>{{l.nickname}}</h2>
+            <p><b>Date:{{ l.date.date() }}</b></p>
+            <p><h6>{{l.text}}</h6></p>
+            <a href="/posts/{{ l.id }}/delete" class="btn btn-warning">Delete</a>
+            <a href="/posts/{{ l.id }}/update" class="btn btn-warning">Change</a>
+        </footer>
+        {% endfor %}
+    {% else %}
+        <p>No comments so far</p>
+    {% endif %}
+    </div>
+</footer>
 
 
 

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New comment
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Add comment</h1>
+  <form method="post">
+    <input type="text" name="nickname" id="nickname" class="form-control" placeholder="nickname"><br>
+    <input type="int" name="mark" id="mark" class="form-control" placeholder="mark"><br>
+    <textarea name="text" id="text" class="form-control" placeholder="text"></textarea><br>
+    <input type="submit" class="gap-2 col-3 btn btn-warning" value="Upload">
+  </form>
+</div>
+{% endblock %}
