@@ -17,17 +17,20 @@ def create():
 
 @app.route('/')
 def main_page():
-    return render_template('main_page.html')
+    reviews = Reviews.query.order_by(Reviews.date.desc()).all()
+    return render_template("main_page.html", reviews=reviews)
 
 
 @app.route('/pricing')
 def pricing_page():
-    return render_template('pricing.html')
+    reviews = Reviews.query.order_by(Reviews.date.desc()).all()
+    return render_template("pricing.html", reviews=reviews)
 
 
 @app.route('/about')
 def about_page():
-    return render_template('about.html')
+    reviews = Reviews.query.order_by(Reviews.date.desc()).all()
+    return render_template("about.html", reviews=reviews)
 
 
 @app.route('/create_comment', methods=['POST', 'GET'])
@@ -47,10 +50,6 @@ def create_comment():
     else:
         return render_template("create_comment.html")
 
-
-def comment():
-    reviews = Reviews.query.order_by(Reviews.date.desc()).all()
-    return render_template("main_page.html", reviews=reviews)
 
 
 @app.route('/reviews/<int:id>/update', methods=['POST', 'GET'])
