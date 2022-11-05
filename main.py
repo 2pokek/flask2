@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from models import db, Reviews
+from cloudipsp import Api, Checkout
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.sqlite3.db'
@@ -14,6 +15,17 @@ def create():
     db.create_all()
     return 'all tables created'
 
+@app.route('/buy/1')
+def buy_product():
+    api = Api(merchant_id=1396424,
+              secret_key='test')
+    checkout = Checkout(api=api)
+    data = {
+        "currency": "USD",
+        "amount": 100
+    }
+    url = checkout.url(data).get('checkout_url')
+    return redirect(url)
 
 @app.route('/')
 def main_page():
@@ -31,17 +43,7 @@ def pricing_page():
 def about_page():
     reviews = Reviews.query.order_by(Reviews.date.desc()).all()
     return render_template("about.html", reviews=reviews)
-@app.route('/order')
-def order():
-    return render_template("order.html")
 
-@app.route('/order/Chillyevening')
-def order1():
-    return render_template("order1.html")
-
-@app.route('/order/Familysize')
-def order2():
-    return render_template("order2.html")
 
 @app.route('/create_comment', methods=['POST', 'GET'])
 def create_comment():
